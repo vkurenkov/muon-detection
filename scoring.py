@@ -5,6 +5,7 @@ import utils
 from sklearn.base            import ClassifierMixin
 from sklearn.metrics         import make_scorer
 from sklearn.model_selection import StratifiedKFold
+from typing                  import Optional
 
 
 def find_threshold_for_efficiency(a, e, w):
@@ -102,8 +103,11 @@ def cross_validate(model: ClassifierMixin, dataset: pd.DataFrame, cv=3) -> None:
     print("Train score: {} (+/- {})".format(train_mean, train_std))
     print("Test score: {} (+/- {})".format(test_mean, test_std))
 
-def create_submission(model: ClassifierMixin, test_dataset: pd.DataFrame, path: str) -> None:
+def create_submission(model: ClassifierMixin, test_dataset: pd.DataFrame, path: Optional[str]=None) -> None:
     prediction = model.predict_proba(test_dataset.values)[:, 1]
     submission = pd.DataFrame(data={"prediction": prediction}, index=test_dataset.index)
 
-    submission.to_csv("sample_submission.csv", index_label=utils.ID_COLUMN)
+    if not path:
+        submission.to_csv("sample_submission.csv", index_label=utils.ID_COLUMN)
+    else:
+        submission.to_csv(path, index_label=utils.ID_COLUMN)
