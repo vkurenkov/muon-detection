@@ -30,6 +30,7 @@ FOI_COLUMNS = ["FOI_hits_X", "FOI_hits_Y", "FOI_hits_T",
 
 ID_COLUMN = "id"
 
+# In millimeters!
 stationRegionsXsize = pd.DataFrame([[6.3, 6.7, 29, 31],
                                     [12.5, 13.5, 58, 62],
                                     [25, 27, 116, 124],
@@ -37,12 +38,18 @@ stationRegionsXsize = pd.DataFrame([[6.3, 6.7, 29, 31],
                                    columns=["M2", "M3", "M4", "M5"],
                                    index=["R1", "R2", "R3", "R4"])
 
-stationRegionsYsize = pd.DataFrame([[31, 34, 36, 39],
-                                    [63, 34, 73, 77],
-                                    [125, 34, 145, 155],
-                                    [250, 34, 270, 309]],
+# In millimeters!
+stationRegionsYsize = pd.DataFrame([[31.3, 33.7, 36, 39],
+                                    [62.5, 67.5, 72, 77],
+                                    [125, 135.0, 145, 155],
+                                    [250, 270.0, 290, 309]],
                                    columns=["M2", "M3", "M4", "M5"],
                                    index=["R1", "R2", "R3", "R4"])
+
+# In meters
+stationSizes = pd.DataFrame([[9.6, 8.0], [10.4, 8.6], [11.1, 9.3], [11.9, 9.9]],
+                            columns=["X", "Y"],
+                            index=["M2", "M3", "M4", "M5"])
 
 stationRegionsArea = stationRegionsXsize * stationRegionsYsize
 # Regions are distributed as 1:2:3:8 from the center of the pipe! TODO
