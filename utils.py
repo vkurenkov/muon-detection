@@ -4,55 +4,69 @@ import numpy as np
 import pandas as pd
 
 SIMPLE_FEATURE_COLUMNS = ['ncl[0]', 'ncl[1]', 'ncl[2]', 'ncl[3]', 'avg_cs[0]',
-       'avg_cs[1]', 'avg_cs[2]', 'avg_cs[3]', 'ndof', 'MatchedHit_TYPE[0]',
-       'MatchedHit_TYPE[1]', 'MatchedHit_TYPE[2]', 'MatchedHit_TYPE[3]',
-       'MatchedHit_X[0]', 'MatchedHit_X[1]', 'MatchedHit_X[2]',
-       'MatchedHit_X[3]', 'MatchedHit_Y[0]', 'MatchedHit_Y[1]',
-       'MatchedHit_Y[2]', 'MatchedHit_Y[3]', 'MatchedHit_Z[0]',
-       'MatchedHit_Z[1]', 'MatchedHit_Z[2]', 'MatchedHit_Z[3]',
-       'MatchedHit_DX[0]', 'MatchedHit_DX[1]', 'MatchedHit_DX[2]',
-       'MatchedHit_DX[3]', 'MatchedHit_DY[0]', 'MatchedHit_DY[1]',
-       'MatchedHit_DY[2]', 'MatchedHit_DY[3]', 'MatchedHit_DZ[0]',
-       'MatchedHit_DZ[1]', 'MatchedHit_DZ[2]', 'MatchedHit_DZ[3]',
-       'MatchedHit_T[0]', 'MatchedHit_T[1]', 'MatchedHit_T[2]',
-       'MatchedHit_T[3]', 'MatchedHit_DT[0]', 'MatchedHit_DT[1]',
-       'MatchedHit_DT[2]', 'MatchedHit_DT[3]', 'Lextra_X[0]', 'Lextra_X[1]',
-       'Lextra_X[2]', 'Lextra_X[3]', 'Lextra_Y[0]', 'Lextra_Y[1]',
-       'Lextra_Y[2]', 'Lextra_Y[3]', 'NShared', 'Mextra_DX2[0]',
-       'Mextra_DX2[1]', 'Mextra_DX2[2]', 'Mextra_DX2[3]', 'Mextra_DY2[0]',
-       'Mextra_DY2[1]', 'Mextra_DY2[2]', 'Mextra_DY2[3]', 'FOI_hits_N', 'PT', 'P']
+                          'avg_cs[1]', 'avg_cs[2]', 'avg_cs[3]', 'ndof', 'MatchedHit_TYPE[0]',
+                          'MatchedHit_TYPE[1]', 'MatchedHit_TYPE[2]', 'MatchedHit_TYPE[3]',
+                          'MatchedHit_X[0]', 'MatchedHit_X[1]', 'MatchedHit_X[2]',
+                          'MatchedHit_X[3]', 'MatchedHit_Y[0]', 'MatchedHit_Y[1]',
+                          'MatchedHit_Y[2]', 'MatchedHit_Y[3]', 'MatchedHit_Z[0]',
+                          'MatchedHit_Z[1]', 'MatchedHit_Z[2]', 'MatchedHit_Z[3]',
+                          'MatchedHit_DX[0]', 'MatchedHit_DX[1]', 'MatchedHit_DX[2]',
+                          'MatchedHit_DX[3]', 'MatchedHit_DY[0]', 'MatchedHit_DY[1]',
+                          'MatchedHit_DY[2]', 'MatchedHit_DY[3]', 'MatchedHit_DZ[0]',
+                          'MatchedHit_DZ[1]', 'MatchedHit_DZ[2]', 'MatchedHit_DZ[3]',
+                          'MatchedHit_T[0]', 'MatchedHit_T[1]', 'MatchedHit_T[2]',
+                          'MatchedHit_T[3]', 'MatchedHit_DT[0]', 'MatchedHit_DT[1]',
+                          'MatchedHit_DT[2]', 'MatchedHit_DT[3]', 'Lextra_X[0]', 'Lextra_X[1]',
+                          'Lextra_X[2]', 'Lextra_X[3]', 'Lextra_Y[0]', 'Lextra_Y[1]',
+                          'Lextra_Y[2]', 'Lextra_Y[3]', 'NShared', 'Mextra_DX2[0]',
+                          'Mextra_DX2[1]', 'Mextra_DX2[2]', 'Mextra_DX2[3]', 'Mextra_DY2[0]',
+                          'Mextra_DY2[1]', 'Mextra_DY2[2]', 'Mextra_DY2[3]', 'FOI_hits_N', 'PT', 'P']
 
 TRAIN_COLUMNS = ["label", "weight"]
 
 FOI_COLUMNS = ["FOI_hits_X", "FOI_hits_Y", "FOI_hits_T",
-               "FOI_hits_Z", "FOI_hits_DX", "FOI_hits_DY", "FOI_hits_S"]
+               "FOI_hits_Z", "FOI_hits_DX", "FOI_hits_DY",
+               "FOI_hits_DT", "FOI_hits_DZ", "FOI_hits_S"]
 
 ID_COLUMN = "id"
 
+stationRegionsXsize = pd.DataFrame([[6.3, 6.7, 29, 31],
+                                    [12.5, 13.5, 58, 62],
+                                    [25, 27, 116, 124],
+                                    [50, 54, 231, 248]],
+                                   columns=["M2", "M3", "M4", "M5"],
+                                   index=["R1", "R2", "R3", "R4"])
+
+stationRegionsYsize = pd.DataFrame([[31, 34, 36, 39],
+                                    [63, 34, 73, 77],
+                                    [125, 34, 145, 155],
+                                    [250, 34, 270, 309]],
+                                   columns=["M2", "M3", "M4", "M5"],
+                                   index=["R1", "R2", "R3", "R4"])
+
+stationRegionsArea = stationRegionsXsize * stationRegionsYsize
+
 N_STATIONS = 4
 FEATURES_PER_STATION = 6
-N_FOI_FEATURES = N_STATIONS*FEATURES_PER_STATION
+N_FOI_FEATURES = N_STATIONS * FEATURES_PER_STATION
 # The value to use for stations with missing hits
 # when computing FOI features
 EMPTY_FILLER = 1000
 
-# Examples on working with the provided files in different ways
 
-# hdf is all fine - but it requires unpickling the numpy arrays
-# which is not guranteed
 def load_train_hdf(path):
     return pd.concat([
-        pd.read_hdf(os.path.join(path, "train_part_%i.hdf" % i))
+        pd.read_hdf(os.path.join(path, "train_part_%i_v2.hdf" % i))
         for i in (1, 2)], axis=0, ignore_index=True)
 
 
 def load_data_csv(path, feature_columns):
     train = pd.concat([
-        pd.read_csv(os.path.join(path, "train_part_%i.csv.gz" % i),
-                    usecols= [ID_COLUMN] + feature_columns + TRAIN_COLUMNS,
+        pd.read_csv(os.path.join(path, "train_part_%i_v2.csv.gz" % i),
+                    usecols=[ID_COLUMN] + feature_columns + TRAIN_COLUMNS,
                     index_col=ID_COLUMN)
         for i in (1, 2)], axis=0, ignore_index=True)
-    test = pd.read_csv(os.path.join(path, "test_public.csv.gz"),
+    test = pd.read_csv(os.path.join(path, "test_public_v2.csv.gz"),
                        usecols=[ID_COLUMN] + feature_columns, index_col=ID_COLUMN)
     return train, test
 
@@ -67,7 +81,7 @@ def load_full_test_csv(path):
     test = pd.read_csv(os.path.join(path, "test_public.csv.gz"),
                        index_col="id", converters=converters,
                        dtype=types,
-                       usecols=[ID_COLUMN]+SIMPLE_FEATURE_COLUMNS+FOI_COLUMNS)
+                       usecols=[ID_COLUMN] + SIMPLE_FEATURE_COLUMNS + FOI_COLUMNS)
     return test
 
 
@@ -79,7 +93,7 @@ def find_closest_hit_per_station(row):
     closest_z_per_station = result[12:16]
     closest_dx_per_station = result[16:20]
     closest_dy_per_station = result[20:24]
-    
+
     for station in range(4):
         hits = (row["FOI_hits_S"] == station)
         if not hits.any():
@@ -90,8 +104,8 @@ def find_closest_hit_per_station(row):
             closest_dx_per_station[station] = EMPTY_FILLER
             closest_dy_per_station[station] = EMPTY_FILLER
         else:
-            x_distances_2 = (row["Lextra_X[%i]" % station] - row["FOI_hits_X"][hits])**2
-            y_distances_2 = (row["Lextra_Y[%i]" % station] - row["FOI_hits_Y"][hits])**2
+            x_distances_2 = (row["Lextra_X[%i]" % station] - row["FOI_hits_X"][hits]) ** 2
+            y_distances_2 = (row["Lextra_Y[%i]" % station] - row["FOI_hits_Y"][hits]) ** 2
             distances_2 = x_distances_2 + y_distances_2
             closest_hit = np.argmin(distances_2)
             closest_x_per_station[station] = x_distances_2[closest_hit]

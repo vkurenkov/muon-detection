@@ -305,3 +305,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/data,linux,macos,python,windows,pycharm+all,jupyternotebook,visualstudiocode
+catboost_info/
