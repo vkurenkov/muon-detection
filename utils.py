@@ -45,6 +45,7 @@ stationRegionsYsize = pd.DataFrame([[31, 34, 36, 39],
                                    index=["R1", "R2", "R3", "R4"])
 
 stationRegionsArea = stationRegionsXsize * stationRegionsYsize
+# Regions are distributed as 1:2:3:8 from the center of the pipe! TODO
 
 N_STATIONS = 4
 FEATURES_PER_STATION = 6
