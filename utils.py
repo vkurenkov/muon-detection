@@ -46,8 +46,8 @@ stationRegionsYsize = pd.DataFrame([[31.3, 33.7, 36, 39],
                                    columns=["M2", "M3", "M4", "M5"],
                                    index=["R1", "R2", "R3", "R4"])
 
-# In meters
-stationSizes = pd.DataFrame([[9.6, 8.0], [10.4, 8.6], [11.1, 9.3], [11.9, 9.9]],
+# In millimeters
+stationSizes = pd.DataFrame([[9600, 8000], [10400, 8600], [11100, 9300], [11900, 9900]],
                             columns=["X", "Y"],
                             index=["M2", "M3", "M4", "M5"])
 
