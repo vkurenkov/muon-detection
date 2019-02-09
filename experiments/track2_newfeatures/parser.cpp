@@ -217,50 +217,44 @@ void ugly_hardcoded_parse(std::istream& stream, size_t* id, std::vector<float>* 
     // Closest hit to extrapolated position
     // Closest hit to matched hit position
     // Distance of the closest hit to the center;
-    const size_t featuresPerStation = 8;
+    const size_t featuresPerStation = 6;
     for (size_t station = 0; station < N_STATIONS; ++station) {
         
         // Closest hit coordinates
-        const size_t closest_hit_ind = closest_hit_per_station[station];
+        //const size_t closest_hit_ind = closest_hit_per_station[station];
         const float  closest_hit_X   = (*result)[FOI_FEATURES_START + station]; // How it should be: FOI_hits_X[closest_hit_ind];
         const float  closest_hit_Y   = (*result)[FOI_FEATURES_START + N_STATIONS + station]; // How it should be: FOI_hits_Y[closest_hit_ind];
 
         // Matched hit coordinates
-        const float matched_hit_X    = (*result)[MATCHED_HIT_X_IND + station]
-        const float matched_hit_Y    = (*result)[MATCHED_HIT_Y_IND + station]
+        const float matched_hit_X    = (*result)[MATCHED_HIT_X_IND + station];
+        const float matched_hit_Y    = (*result)[MATCHED_HIT_Y_IND + station];
 
         // Extrapolated hit coordiantes
-        const float extra_hit_X      = (*result)[LEXTRA_X_INDEX + station]
-        const float extra_hit_Y      = (*result)[LEXTRA_Y_INDEX + station]
+        const float extra_hit_X      = (*result)[LEXTRA_X_INDEX + station];
+        const float extra_hit_Y      = (*result)[LEXTRA_Y_INDEX + station];
 
         /* First coordinate - X */
-        // Extrapolated - closest hit (already calculated?)
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 0] 
-            = square(extra_hit_X - closest_hit_X);
         // Closest hit - matched hit
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 1]
+        (*result)[ADD_FEATURES_START + featuresPerStation * station + 0]
             = square(closest_hit_X - matched_hit_X);
         // Extrapolated - matched hit
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 2] 
+        (*result)[ADD_FEATURES_START + featuresPerStation * station + 1] 
             = square(extra_hit_X - matched_hit_X);
 
         /* Second coordinate - Y*/
-        // Extrapolated - closest hit
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 3] 
-            = square(extra_hit_Y - closest_hit_Y);
         // Closest hit - matched hit
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 4] 
+        (*result)[ADD_FEATURES_START + featuresPerStation * station + 2] 
             = square(closest_hit_Y - matched_hit_Y);
         // Extrapolated - matched hit
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 5] 
+        (*result)[ADD_FEATURES_START + featuresPerStation * station + 3] 
             = square(extra_hit_Y - matched_hit_Y);
 
         /* Other distances */
         // Closest hit to center
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 6]
-            = std::sqrtf(square(closest_hit_X) + square(closest_hit_Y))
+        (*result)[ADD_FEATURES_START + featuresPerStation * station + 4]
+            = sqrtf(square(closest_hit_X) + square(closest_hit_Y));
         // Matched hit to center
-        (*result)[ADD_FEATURES_START + featuresPerStation * station + 7]
-            = std::sqrtf(square(matched_hit_X) + square(matched_hit_Y))
+        (*result)[ADD_FEATURES_START + featuresPerStation * station + 5]
+            = sqrtf(square(matched_hit_X) + square(matched_hit_Y));
     }
 }
